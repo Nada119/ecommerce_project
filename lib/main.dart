@@ -1,5 +1,6 @@
 import 'package:ecommerce_project/controllers/popular_product_controller.dart';
 import 'package:ecommerce_project/controllers/recommended_product_controller.dart';
+import 'package:ecommerce_project/pages/cart/cart_page.dart';
 import 'package:ecommerce_project/pages/food/popular_food_detail.dart';
 import 'package:ecommerce_project/pages/food/recomended_food_detail.dart';
 import 'package:ecommerce_project/pages/home/food_page_body.dart';
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       home: MainFoodPage(),
-      //initialRoute: RouteHelper.initial,
+      initialRoute: RouteHelper.initial,
       getPages: RouteHelper.routes,
     );
   }

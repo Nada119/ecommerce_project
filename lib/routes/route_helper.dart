@@ -20,7 +20,11 @@ class RouteHelper {
     /*String page*/
   ) =>
       '$popularFood?pageId=$pageId'; //pass parameters
-  static String getRecommendedFood() => '$recommendeFood';
+  static String getRecommendedFood(
+    int pageId,
+    /*String page*/
+  ) =>
+      '$recommendeFood?pageId=$pageId';
   //static String getCartPage() => '$cartPage';
   //static String getsigInPage() => '$sigIn';
   //static String getAddresssPage() => '$addAddress';
@@ -48,7 +52,11 @@ class RouteHelper {
     GetPage(
       name: recommendeFood,
       page: () {
-        return RecommendedFoodDetail();
+        var pageId = Get.parameters['pageId'];
+        var page = Get.parameters['page'];
+        return RecommendedFoodDetail(
+          pageId: int.parse(pageId!), /*page: page!*/
+        );
       },
       transition: Transition.fadeIn,
     ),

@@ -131,22 +131,23 @@ class _FoodPageBodyState extends State<FoodPageBody>
                 ),
               ],
             ),
-
+            //recomended food
             //List of food and images
-            GestureDetector(
-              onTap: () {
-                Get.toNamed(RouteHelper.recommendeFood);
-              },
-              child: GetBuilder<RecommendedProductController>(
-                  builder: (recommendedProduct) {
-                return recommendedProduct.isLoaded
-                    ? Container(
-                        height: 700,
-                        child: ListView.builder(
-                            itemCount: recommendedProduct
-                                .recommendedProductList.length,
-                            itemBuilder: (context, index) {
-                              return Container(
+            GetBuilder<RecommendedProductController>(
+                builder: (recommendedProduct) {
+              return recommendedProduct.isLoaded
+                  ? Container(
+                      height: 700,
+                      child: ListView.builder(
+                          itemCount:
+                              recommendedProduct.recommendedProductList.length,
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                              onTap: () {
+                                Get.toNamed(
+                                    RouteHelper.getRecommendedFood(index));
+                              },
+                              child: Container(
                                 margin: EdgeInsets.only(
                                     left: Dimensions.width20,
                                     right: Dimensions.width20,
@@ -201,14 +202,14 @@ class _FoodPageBodyState extends State<FoodPageBody>
                                     ),
                                   ],
                                 ),
-                              );
-                            }),
-                      )
-                    : CircularProgressIndicator(
-                        color: AppColors.mainColor,
-                      );
-              }),
-            )
+                              ),
+                            );
+                          }),
+                    )
+                  : CircularProgressIndicator(
+                      color: AppColors.mainColor,
+                    );
+            })
           ],
         ),
       ),
