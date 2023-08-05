@@ -77,7 +77,7 @@ class PopularProductController extends GetxController {
   //every time we call new page we call this one, this only will clear data so I need to save it also
   void initProduct(ProductModel product, CartController cart) {
     _quantity = 0;
-    //_ionCartItems = 0;
+    _ionCartItems = 0;
     //get from storage _incartitems
     _cart = cart;
     var exist = false;

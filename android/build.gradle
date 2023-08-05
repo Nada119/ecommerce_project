@@ -6,7 +6,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.3.0'
+        classpath 'com.android.tools.build:gradle:7.0.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -29,3 +29,14 @@ subprojects {
 tasks.register("clean", Delete) {
     delete rootProject.buildDir
 }
+
+// Set Java version for all projects
+allprojects {
+    tasks.withType(JavaCompile) {
+        options.compilerArgs << "-source"
+        options.compilerArgs << "11"
+        options.compilerArgs << "-target"
+        options.compilerArgs << "11"
+    }
+}
+

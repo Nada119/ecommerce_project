@@ -6,12 +6,15 @@ import 'package:ecommerce_project/data/repository/cart_repo.dart';
 import 'package:ecommerce_project/data/repository/popular_product_repo.dart';
 import 'package:ecommerce_project/data/repository/recommended_product_repo.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../utils/app_constants.dart';
 
 Future<void> init() async {
   //async because of future
 
+  final sharedPreferences = await SharedPreferences.getInstance();
+  Get.lazyPut(() => sharedPreferences);
   //first dependency that we loaded
 
   //api client
@@ -22,11 +25,13 @@ Future<void> init() async {
   //repos
   Get.lazyPut(() => PopularProductRepo(apiClient: Get.find()));
   Get.lazyPut(() => RecommendedProductRepo(apiClent: Get.find()));
-  Get.lazyPut(() => CartRepo());
+  Get.lazyPut(() => CartRepo(sharedPreferences: Get.find()));
 
   //controllers
   Get.lazyPut(() => PopularProductController(popularProductRepo: Get.find()));
   Get.lazyPut(
       () => RecommendedProductController(recommendedProductRepo: Get.find()));
-  Get.lazyPut(() => CartController(cartRepo: Get.find()));
+
+  Get.lazyPut(() => CartController(
+      cartRepo: Get.find())); //or permanent:true but it doesn't work now
 }

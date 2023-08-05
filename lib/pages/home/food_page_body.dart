@@ -36,7 +36,7 @@ class _FoodPageBodyState extends State<FoodPageBody>
   @override
   void dispose() {
     _animationController.dispose();
-    super.dispose();
+    super.dispose(); // to collect garbage correctly
   }
 
   int currentIndex = 0;
@@ -144,8 +144,8 @@ class _FoodPageBodyState extends State<FoodPageBody>
                           itemBuilder: (context, index) {
                             return GestureDetector(
                               onTap: () {
-                                Get.toNamed(
-                                    RouteHelper.getRecommendedFood(index));
+                                Get.toNamed(RouteHelper.getRecommendedFood(
+                                    index, "home"));
                               },
                               child: Container(
                                 margin: EdgeInsets.only(
@@ -222,7 +222,7 @@ class _FoodPageBodyState extends State<FoodPageBody>
         GestureDetector(
           onTap: () {
             //basic routing Get.toNamed()
-            Get.toNamed(RouteHelper.getPopularFood(index));
+            Get.toNamed(RouteHelper.getPopularFood(index, "home"));
           },
           child: Container(
             width: 320, //no need for height because it takes parent height
