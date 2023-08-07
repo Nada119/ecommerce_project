@@ -18,7 +18,7 @@ void main() async {
 
   //load dependencies before running your app
   await dep.init();
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {

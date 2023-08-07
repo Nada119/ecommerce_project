@@ -108,7 +108,7 @@ class _FoodPageBodyState extends State<FoodPageBody>
               return _buildDotsIndicator();
             }),
             Row(
-              //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
                   padding: EdgeInsets.only(
@@ -122,7 +122,7 @@ class _FoodPageBodyState extends State<FoodPageBody>
                   padding: EdgeInsets.only(
                     left: Dimensions.width20,
                     bottom: Dimensions.height20,
-                    right: 1010,
+                    //right: 1010,
                   ),
                   child: SmallText(
                     text: "Food Pairing",
@@ -133,83 +133,86 @@ class _FoodPageBodyState extends State<FoodPageBody>
             ),
             //recomended food
             //List of food and images
-            GetBuilder<RecommendedProductController>(
-                builder: (recommendedProduct) {
-              return recommendedProduct.isLoaded
-                  ? Container(
-                      height: 700,
-                      child: ListView.builder(
-                          itemCount:
-                              recommendedProduct.recommendedProductList.length,
-                          itemBuilder: (context, index) {
-                            return GestureDetector(
-                              onTap: () {
-                                Get.toNamed(RouteHelper.getRecommendedFood(
-                                    index, "home"));
-                              },
-                              child: Container(
-                                margin: EdgeInsets.only(
-                                    left: Dimensions.width20,
-                                    right: Dimensions.width20,
-                                    bottom: Dimensions.height10),
-                                child: Row(
-                                  children: [
-                                    //image section
-                                    Container(
-                                      width: 120,
-                                      height: 120,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(
-                                            Dimensions.radius20),
-                                        color: Colors.white38,
-                                        image: DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image: NetworkImage(AppConstants
-                                                  .BASE_URL +
-                                              AppConstants.UPLOAD_URL +
-                                              recommendedProduct
-                                                  .recommendedProductList[index]
-                                                  .img!),
-                                        ),
-                                      ),
-                                    ),
-
-                                    //text container
-                                    Expanded(
-                                      child: Container(
-                                        height: 100,
-                                        //width: 200,
+            SingleChildScrollView(
+              child: GetBuilder<RecommendedProductController>(
+                  builder: (recommendedProduct) {
+                return recommendedProduct.isLoaded
+                    ? Container(
+                        height: 700,
+                        child: ListView.builder(
+                            itemCount: recommendedProduct
+                                .recommendedProductList.length,
+                            itemBuilder: (context, index) {
+                              return GestureDetector(
+                                onTap: () {
+                                  Get.toNamed(RouteHelper.getRecommendedFood(
+                                      index, "home"));
+                                },
+                                child: Container(
+                                  margin: EdgeInsets.only(
+                                      left: Dimensions.width20,
+                                      right: Dimensions.width20,
+                                      bottom: Dimensions.height10),
+                                  child: Row(
+                                    children: [
+                                      //image section
+                                      Container(
+                                        width: 120,
+                                        height: 120,
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.only(
-                                              topRight: Radius.circular(
-                                                  Dimensions.radius20),
-                                              bottomRight: Radius.circular(
-                                                  Dimensions.radius20)),
-                                          color: Colors.white,
-                                        ),
-                                        child: Padding(
-                                          padding: EdgeInsets.only(
-                                            left: Dimensions.width10,
-                                            right: Dimensions.width10,
-                                          ),
-                                          child: AppColumn(
-                                            text: recommendedProduct
-                                                .recommendedProductList[index]
-                                                .name!,
+                                          borderRadius: BorderRadius.circular(
+                                              Dimensions.radius20),
+                                          color: Colors.white38,
+                                          image: DecorationImage(
+                                            fit: BoxFit.cover,
+                                            image: NetworkImage(
+                                                AppConstants.BASE_URL +
+                                                    AppConstants.UPLOAD_URL +
+                                                    recommendedProduct
+                                                        .recommendedProductList[
+                                                            index]
+                                                        .img!),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ],
+
+                                      //text container
+                                      Expanded(
+                                        child: Container(
+                                          height: 100,
+                                          //width: 200,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.only(
+                                                topRight: Radius.circular(
+                                                    Dimensions.radius20),
+                                                bottomRight: Radius.circular(
+                                                    Dimensions.radius20)),
+                                            color: Colors.white,
+                                          ),
+                                          child: Padding(
+                                            padding: EdgeInsets.only(
+                                              left: Dimensions.width10,
+                                              right: Dimensions.width10,
+                                            ),
+                                            child: AppColumn(
+                                              text: recommendedProduct
+                                                  .recommendedProductList[index]
+                                                  .name!,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            );
-                          }),
-                    )
-                  : CircularProgressIndicator(
-                      color: AppColors.mainColor,
-                    );
-            })
+                              );
+                            }),
+                      )
+                    : CircularProgressIndicator(
+                        color: AppColors.mainColor,
+                      );
+              }),
+            )
           ],
         ),
       ),
